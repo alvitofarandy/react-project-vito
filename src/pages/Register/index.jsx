@@ -6,7 +6,7 @@ const Register = () => {
     name: "",
     userName: "",
     password: "",
-    role: "",
+    roleId: "",
   });
 
   const handleChange = (e) => {
@@ -19,7 +19,7 @@ const Register = () => {
   const handleSubmit = () => {
     const payload = {
       ...form,
-      role: parseInt(form.role),
+      roleId: parseInt(form.roleId),
     };
 
     axios
@@ -39,24 +39,28 @@ const Register = () => {
         value={form.name}
         name="name"
         onChange={handleChange}
+        placeholder="name"
       />
       <input
         type="test"
         value={form.userName}
         name="userName"
         onChange={handleChange}
+        placeholder="username"
       />
       <input
         type="password"
         value={form.password}
         name="password"
         onChange={handleChange}
+        placeholder="password"
       />
       <input
         type="text"
-        value={form.role}
-        name="role"
+        value={form.roleId}
+        name="roleId"
         onChange={handleChange}
+        placeholder="role"
       />
 
       <button onClick={handleSubmit}>Register</button>
@@ -65,3 +69,7 @@ const Register = () => {
 };
 
 export default Register;
+
+// protectedRoute
+// Delete
+// Create
