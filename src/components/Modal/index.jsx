@@ -10,7 +10,6 @@ const Modal = ({ isModalOpen }) => {
 
   const handleUpload = (e) => {
     e.preventDefault();
-    console.log("upload", file);
 
     const config = {
       headers: {
@@ -18,7 +17,6 @@ const Modal = ({ isModalOpen }) => {
         apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
       },
     };
-    // disini hit api uload
     const formData = new FormData();
     formData.append("image", file);
     axios
@@ -27,12 +25,8 @@ const Modal = ({ isModalOpen }) => {
         formData,
         config
       )
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then((res) => {})
+      .catch((err) => {});
   };
 
   useEffect(() => {

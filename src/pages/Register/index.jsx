@@ -1,12 +1,16 @@
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/footer";
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
-    name: "",
-    userName: "",
+    email: "",
     password: "",
-    roleId: "",
   });
 
   const handleChange = (e) => {
@@ -19,57 +23,57 @@ const Register = () => {
   const handleSubmit = () => {
     const payload = {
       ...form,
-      roleId: parseInt(form.roleId),
     };
 
     axios
-      .post("https://api.mudoapi.site/register", payload)
+      .post("https://reqres.in/api/register", payload)
       .then((res) => {
-        console.log(res);
+        navigate("/login");
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   return (
     <div>
-      <input
-        type="text"
-        value={form.name}
-        name="name"
-        onChange={handleChange}
-        placeholder="name"
-      />
-      <input
-        type="test"
-        value={form.userName}
-        name="userName"
-        onChange={handleChange}
-        placeholder="username"
-      />
-      <input
-        type="password"
-        value={form.password}
-        name="password"
-        onChange={handleChange}
-        placeholder="password"
-      />
-      <input
-        type="text"
-        value={form.roleId}
-        name="roleId"
-        onChange={handleChange}
-        placeholder="role"
-      />
-
-      <button onClick={handleSubmit}>Register</button>
+      <Navbar />
+      <div className="min-h-screen bg-gray-200 flex items-center justify-center">
+        <div className="bg-white rounded-xl flex flex-col gap-6 p-8 shadow-lg w-[90%] max-w-md">
+          <p className="text-center text-xl font-bold">Register</p>
+          <input
+            className="bg-gray-200 border rounded-lg p-2 pl-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+            type="text"
+            value={form.email}
+            name="email"
+            onChange={handleChange}
+            placeholder="Username or Email"
+          />
+          <input
+            className="bg-gray-200 border rounded-lg p-2 pl-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+            type="password"
+            value={form.password}
+            name="password"
+            onChange={handleChange}
+            placeholder="Password"
+          />
+          <button
+            className="bg-blue-500 text-white rounded-lg p-2 w-full hover:bg-blue-600 transition-colors duration-200"
+            onClick={handleSubmit}
+          >
+            Register
+          </button>
+          <p className="text-center">
+            Already have an account?{" "}
+            <Link to="/login">
+              <span className="cursor-pointer text-blue-600 hover:underline">
+                Login Here
+              </span>
+            </Link>
+          </p>
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 };
 
 export default Register;
-
-// protectedRoute
-// Delete
-// Create
